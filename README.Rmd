@@ -12,6 +12,33 @@ knitr::opts_chunk$set(
   error = FALSE,
   message = FALSE
 )
+`%>%` <- magrittr::`%>%`
+source("R/my_functions.R")
 ```
 
-# cana-ajferreira
+# Projeto cana Aryane J. Fereira (IAC)
+
+## Análise Preliminar
+
+### Carregando o banco de dados
+```{r}
+dados <-readr::read_rds("data/my_data.rds")
+```
+
+### Resumo estatístico rápido
+```{r}
+dados$data %>% 
+  purrr::map(skimr::skim) %>%
+  purrr::map_chr(knitr::knit_print, options = list(skimr_include_summary = FALSE)) %>%
+  knitr::asis_output()
+```
+
+### Gráfios boxplot
+```{r}
+dados <- dados %>% 
+  dplyr::mutate(
+    boxplots = purrr::map(data, my_summary)
+  )
+dados$boxplots
+```
+
