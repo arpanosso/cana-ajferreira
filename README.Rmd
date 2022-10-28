@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 source("R/my_functions.R")
 ```
 
-# Projeto cana Aryane J. Fereira (IAC)
+# Projeto cana Aryane J. Ferreira (IAC)
 
 ## Análise Preliminar
 
@@ -33,12 +33,15 @@ dados$data %>%
   knitr::asis_output()
 ```
 
-### Gráfios boxplot
+### Gráficos boxplot
 ```{r}
 dados <- dados %>% 
   dplyr::mutate(
-    boxplots = purrr::map(data, my_summary)
+    boxplot = purrr::map(data, my_summary, type="boxplot"),
+    histograma = purrr::map(data, my_summary,type="histograma"),
+    anova = purrr::map(data, my_summary,type="regressao")
   )
-dados$boxplots
+dados$boxplot
+dados$anova
 ```
 
