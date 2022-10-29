@@ -33,15 +33,27 @@ dados$data %>%
   knitr::asis_output()
 ```
 
-### Gráficos boxplot
+## Análise com desdobramento.
+
+Observe que nessa análise desdobramos as  interações menores que $0,35$. Utilizando regressão para doses e LSD (teste-t), para forma.
+
 ```{r}
 dados <- dados %>% 
   dplyr::mutate(
     boxplot = purrr::map(data, my_summary, type="boxplot"),
     histograma = purrr::map(data, my_summary,type="histograma"),
-    anova = purrr::map(data, my_summary,type="regressao")
+    anova = purrr::map(data, my_summary,type="regressao"),
+    interacao = purrr::map(data, my_summary,type="interacao"),
+    desdobramento = purrr::map(data, my_summary,type="desdobramento")
   )
-dados$boxplot
-dados$anova
 ```
+
+## Gráficos da interação
+
+```{r}
+dados$interacao
+```
+
+
+
 
