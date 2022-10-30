@@ -24,7 +24,7 @@ dados$data %>%
 
 | skim_variable | n_missing | complete_rate | ordered | n_unique | top_counts                |
 |:--------------|----------:|--------------:|:--------|---------:|:--------------------------|
-| forma         |         0 |             1 | FALSE   |        3 | fol: 16, Sol: 16, Con: 16 |
+| forma         |         0 |             1 | FALSE   |        3 | fol: 16, sol: 16, con: 16 |
 
 **Variable type: numeric**
 
@@ -39,7 +39,7 @@ dados$data %>%
 
 | skim_variable | n_missing | complete_rate | ordered | n_unique | top_counts                |
 |:--------------|----------:|--------------:|:--------|---------:|:--------------------------|
-| forma         |         0 |             1 | FALSE   |        3 | Fol: 16, Sol: 16, Con: 16 |
+| forma         |         0 |             1 | FALSE   |        3 | fol: 16, sol: 16, con: 16 |
 
 **Variable type: numeric**
 
@@ -57,7 +57,7 @@ dados$data %>%
 
 | skim_variable | n_missing | complete_rate | ordered | n_unique | top_counts                |
 |:--------------|----------:|--------------:|:--------|---------:|:--------------------------|
-| forma         |         0 |             1 | FALSE   |        3 | Fol: 16, Sol: 16, Con: 16 |
+| forma         |         0 |             1 | FALSE   |        3 | fol: 16, sol: 16, con: 16 |
 
 **Variable type: numeric**
 
@@ -77,7 +77,7 @@ dados$data %>%
 
 | skim_variable | n_missing | complete_rate | ordered | n_unique | top_counts                |
 |:--------------|----------:|--------------:|:--------|---------:|:--------------------------|
-| forma         |         0 |             1 | FALSE   |        3 | Fol: 16, Sol: 16, Con: 16 |
+| forma         |         0 |             1 | FALSE   |        3 | fol: 16, sol: 16, con: 16 |
 
 **Variable type: numeric**
 
@@ -97,7 +97,7 @@ dados$data %>%
 
 | skim_variable | n_missing | complete_rate | ordered | n_unique | top_counts                |
 |:--------------|----------:|--------------:|:--------|---------:|:--------------------------|
-| forma         |         0 |             1 | FALSE   |        3 | Con: 16, fol: 16, Sol: 16 |
+| forma         |         0 |             1 | FALSE   |        3 | con: 16, fol: 16, sol: 16 |
 
 **Variable type: numeric**
 
@@ -114,7 +114,7 @@ dados$data %>%
 
 | skim_variable | n_missing | complete_rate | ordered | n_unique | top_counts                |
 |:--------------|----------:|--------------:|:--------|---------:|:--------------------------|
-| forma         |         0 |             1 | FALSE   |        3 | fol: 16, Sol: 16, Con: 16 |
+| forma         |         0 |             1 | FALSE   |        3 | fol: 16, sol: 16, con: 16 |
 
 **Variable type: numeric**
 
@@ -136,11 +136,13 @@ Utilizando regressão para doses e LSD (teste-t), para forma.
 ``` r
 dados <- dados %>% 
   dplyr::mutate(
-    boxplot = purrr::map(data, my_summary, type="boxplot"),
-    histograma = purrr::map(data, my_summary,type="histograma"),
-    anova = purrr::map(data, my_summary,type="regressao"),
+    # boxplot = purrr::map(data, my_summary, type="boxplot"),
+    # histograma = purrr::map(data, my_summary,type="histograma"),
+    # anova = purrr::map(data, my_summary,type="regressao"),
     interacao = purrr::map(data, my_summary,type="interacao"),
-    desdobramento = purrr::map(data, my_summary,type="desdobramento")
+    # ajustes = purrr::map(data, my_summary,type="ajustes")
+    desdobramento = purrr::map(data, my_summary,type="desdobramento"),
+    best = purrr::map(data, my_summary,type="best")
   )
 #> [1] "Variavel: tch"
 #> ------------------------------------------------------------------------
@@ -182,8 +184,8 @@ dados <- dados %>%
 #> Bloco                3  121.7378  40.57928 0.4907 0.6911
 #> Forma                2  686.1880 343.09403  4.149 0.0247
 #> Dose:Forma foliar    3  123.5995  41.19982 0.4982 0.6861
-#> Dose:Forma Solo      3  285.0157  95.00524 1.1489 0.3439
-#> Dose:Forma Controle  3  789.7431 263.24771 3.1834 0.0366
+#> Dose:Forma solo      3  285.0157  95.00524 1.1489 0.3439
+#> Dose:Forma controle  3  789.7431 263.24771 3.1834 0.0366
 #> Residuo             33 2728.8719  82.69309              
 #> Total               47 4735.1561 100.74800              
 #> ------------------------------------------------------------------------
@@ -202,7 +204,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -283,7 +285,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -536,9 +538,9 @@ dados <- dados %>%
 #> Teste t (LSD)
 #> ------------------------------------------------------------------------
 #> Grupos  Tratamentos  Medias
-#> a     Solo    131.0138 
+#> a     solo    131.0138 
 #> ab    foliar      129.2638 
-#>  b    Controle    127.2788 
+#>  b    controle    127.2788 
 #> ------------------------------------------------------------------------
 #> 
 #> [1] "Variavel: tah"
@@ -581,8 +583,8 @@ dados <- dados %>%
 #> Bloco                3  0.83399 0.27800 0.2126  0.887
 #> Forma                2 19.92688 9.96344 7.6186 0.0019
 #> Dose:Forma foliar    3  1.45285 0.48428 0.3703 0.7749
-#> Dose:Forma Solo      3  6.47410 2.15803 1.6502 0.1967
-#> Dose:Forma Controle  3  9.45586 3.15195 2.4102 0.0845
+#> Dose:Forma solo      3  6.47410 2.15803 1.6502 0.1967
+#> Dose:Forma controle  3  9.45586 3.15195 2.4102 0.0845
 #> Residuo             33 43.15656 1.30777              
 #> Total               47 81.30024 1.72979              
 #> ------------------------------------------------------------------------
@@ -601,7 +603,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -682,7 +684,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -863,16 +865,16 @@ dados <- dados %>%
 #>                     GL         SQ        QM      Fc  Pr.Fc
 #> Bloco                3   63.03065  21.01022  1.4138 0.2562
 #> Forma                2  488.35378 244.17689 16.4304      0
-#> Dose:Forma Foliar    3   20.37849   6.79283  0.4571 0.7141
-#> Dose:Forma Solo      3   69.80813  23.26938  1.5658 0.2162
-#> Dose:Forma Controle  3   71.16304  23.72101  1.5962  0.209
+#> Dose:Forma foliar    3   20.37849   6.79283  0.4571 0.7141
+#> Dose:Forma solo      3   69.80813  23.26938  1.5658 0.2162
+#> Dose:Forma controle  3   71.16304  23.72101  1.5962  0.209
 #> Residuo             33  490.42108  14.86124               
 #> Total               47 1203.15518  25.59905               
 #> ------------------------------------------------------------------------
 #> 
 #> 
 #> 
-#>  Dose  dentro do nivel  Foliar  de  Forma 
+#>  Dose  dentro do nivel  foliar  de  Forma 
 #> 
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
@@ -884,7 +886,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -965,7 +967,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -1146,16 +1148,16 @@ dados <- dados %>%
 #>                     GL         SQ        QM     Fc  Pr.Fc
 #> Bloco                3    6.10431   2.03477 0.1101 0.9536
 #> Forma                2  217.88234 108.94117 5.8969 0.0065
-#> Dose:Forma Foliar    3   54.86711  18.28904   0.99 0.4095
-#> Dose:Forma Solo      3  252.89572  84.29857  4.563 0.0088
-#> Dose:Forma Controle  3  172.59960  57.53320 3.1142 0.0394
+#> Dose:Forma foliar    3   54.86711  18.28904   0.99 0.4095
+#> Dose:Forma solo      3  252.89572  84.29857  4.563 0.0088
+#> Dose:Forma controle  3  172.59960  57.53320 3.1142 0.0394
 #> Residuo             33  609.65269  18.47432              
 #> Total               47 1314.00177  27.95748              
 #> ------------------------------------------------------------------------
 #> 
 #> 
 #> 
-#>  Dose  dentro do nivel  Foliar  de  Forma 
+#>  Dose  dentro do nivel  foliar  de  Forma 
 #> 
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
@@ -1167,7 +1169,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -1248,7 +1250,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -1429,16 +1431,16 @@ dados <- dados %>%
 #>                     GL         SQ        QM     Fc  Pr.Fc
 #> Bloco                3  442.37824 147.45941 4.1272 0.0137
 #> Forma                2   59.43800  29.71900 0.8318 0.4442
-#> Dose:Forma Foliar    3   78.81316  26.27105 0.7353 0.5385
-#> Dose:Forma Solo      3  154.77595  51.59198  1.444 0.2477
-#> Dose:Forma Controle  3  363.43161 121.14387 3.3906 0.0293
+#> Dose:Forma foliar    3   78.81316  26.27105 0.7353 0.5385
+#> Dose:Forma solo      3  154.77595  51.59198  1.444 0.2477
+#> Dose:Forma controle  3  363.43161 121.14387 3.3906 0.0293
 #> Residuo             33 1179.05392  35.72891              
 #> Total               47 2277.89088  48.46576              
 #> ------------------------------------------------------------------------
 #> 
 #> 
 #> 
-#>  Dose  dentro do nivel  Foliar  de  Forma 
+#>  Dose  dentro do nivel  foliar  de  Forma 
 #> 
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
@@ -1450,7 +1452,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -1531,7 +1533,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -1712,16 +1714,16 @@ dados <- dados %>%
 #>                     GL        SQ        QM     Fc  Pr.Fc
 #> Bloco                3  645.8968 215.29893  3.759   0.02
 #> Forma                2  839.9860 419.99302 7.3329 0.0023
-#> Dose:Forma Foliar    3  168.1566  56.05219 0.9786 0.4146
-#> Dose:Forma Solo      3  410.5271 136.84237 2.3892 0.0865
-#> Dose:Forma Controle  3  893.8224 297.94079 5.2019 0.0047
+#> Dose:Forma foliar    3  168.1566  56.05219 0.9786 0.4146
+#> Dose:Forma solo      3  410.5271 136.84237 2.3892 0.0865
+#> Dose:Forma controle  3  893.8224 297.94079 5.2019 0.0047
 #> Residuo             33 1890.0850  57.27530              
 #> Total               47 4848.4739 103.15902              
 #> ------------------------------------------------------------------------
 #> 
 #> 
 #> 
-#>  Dose  dentro do nivel  Foliar  de  Forma 
+#>  Dose  dentro do nivel  foliar  de  Forma 
 #> 
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
@@ -1733,7 +1735,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -1814,7 +1816,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -1995,16 +1997,16 @@ dados <- dados %>%
 #>                     GL        SQ        QM     Fc  Pr.Fc
 #> Bloco                3  121.7378  40.57928 0.4907 0.6911
 #> Forma                2  686.1880 343.09403  4.149 0.0247
-#> Dose:Forma Foliar    3  123.5995  41.19982 0.4982 0.6861
-#> Dose:Forma Solo      3  285.0157  95.00524 1.1489 0.3439
-#> Dose:Forma Controle  3  789.7431 263.24771 3.1834 0.0366
+#> Dose:Forma foliar    3  123.5995  41.19982 0.4982 0.6861
+#> Dose:Forma solo      3  285.0157  95.00524 1.1489 0.3439
+#> Dose:Forma controle  3  789.7431 263.24771 3.1834 0.0366
 #> Residuo             33 2728.8719  82.69309              
 #> Total               47 4735.1561 100.74800              
 #> ------------------------------------------------------------------------
 #> 
 #> 
 #> 
-#>  Dose  dentro do nivel  Foliar  de  Forma 
+#>  Dose  dentro do nivel  foliar  de  Forma 
 #> 
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
@@ -2016,7 +2018,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -2097,7 +2099,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -2278,16 +2280,16 @@ dados <- dados %>%
 #>                     GL      SQ      QM      Fc  Pr.Fc
 #> Bloco                3 0.00338 0.00113  1.0041 0.4032
 #> Forma                2 0.02765 0.01383 12.3144  1e-04
-#> Dose:Forma Foliar    3 0.00273 0.00091  0.8101 0.4974
-#> Dose:Forma Solo      3 0.00787 0.00262  2.3353 0.0918
-#> Dose:Forma Controle  3 0.01192 0.00397  3.5386 0.0251
+#> Dose:Forma foliar    3 0.00273 0.00091  0.8101 0.4974
+#> Dose:Forma solo      3 0.00787 0.00262  2.3353 0.0918
+#> Dose:Forma controle  3 0.01192 0.00397  3.5386 0.0251
 #> Residuo             33 0.03705 0.00112               
 #> Total               47 0.09060 0.00193               
 #> ------------------------------------------------------------------------
 #> 
 #> 
 #> 
-#>  Dose  dentro do nivel  Foliar  de  Forma 
+#>  Dose  dentro do nivel  foliar  de  Forma 
 #> 
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
@@ -2299,7 +2301,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -2380,7 +2382,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -2633,9 +2635,9 @@ dados <- dados %>%
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
 #>     Niveis   Medias
-#> 1 Controle 84.45903
-#> 2   Foliar 91.23554
-#> 3     Solo 89.44580
+#> 1 controle 84.45903
+#> 2   foliar 91.23554
+#> 3     solo 89.44580
 #> ------------------------------------------------------------------------
 #> [1] "Variavel: ponteiro"
 #> ------------------------------------------------------------------------
@@ -2748,9 +2750,9 @@ dados <- dados %>%
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
 #>     Niveis    Medias
-#> 1 Controle 10.385625
-#> 2   Foliar  9.990625
-#> 3     Solo 10.234375
+#> 1 controle 10.385625
+#> 2   foliar  9.990625
+#> 3     solo 10.234375
 #> ------------------------------------------------------------------------
 #> [1] "Variavel: palha"
 #> ------------------------------------------------------------------------
@@ -2791,16 +2793,16 @@ dados <- dados %>%
 #>                     GL         SQ        QM     Fc  Pr.Fc
 #> Bloco                3   877.6177  292.5392 0.9245 0.4398
 #> Forma                2   557.2808  278.6404 0.8806 0.4241
-#> Dose:Forma Foliar    3  5263.8813 1754.6271 5.5449 0.0034
-#> Dose:Forma Solo      3  3050.8734 1016.9578 3.2138 0.0354
-#> Dose:Forma Controle  3  2578.8130  859.6043 2.7165 0.0604
+#> Dose:Forma foliar    3  5263.8813 1754.6271 5.5449 0.0034
+#> Dose:Forma solo      3  3050.8734 1016.9578 3.2138 0.0354
+#> Dose:Forma controle  3  2578.8130  859.6043 2.7165 0.0604
 #> Residuo             33 10442.4672  316.4384              
 #> Total               47 22770.9334  484.4880              
 #> ------------------------------------------------------------------------
 #> 
 #> 
 #> 
-#>  Dose  dentro do nivel  Foliar  de  Forma 
+#>  Dose  dentro do nivel  foliar  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -2881,7 +2883,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -2962,7 +2964,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -3143,16 +3145,16 @@ dados <- dados %>%
 #>                     GL         SQ        QM     Fc  Pr.Fc
 #> Bloco                3   389.8491  129.9497 0.2398  0.868
 #> Forma                2   658.1658  329.0829 0.6072 0.5508
-#> Dose:Forma Foliar    3  6369.9266 2123.3089 3.9178 0.0169
-#> Dose:Forma Solo      3  7595.8523 2531.9507 4.6718 0.0079
-#> Dose:Forma Controle  3  5064.5128 1688.1709 3.1149 0.0393
+#> Dose:Forma foliar    3  6369.9266 2123.3089 3.9178 0.0169
+#> Dose:Forma solo      3  7595.8523 2531.9507 4.6718 0.0079
+#> Dose:Forma controle  3  5064.5128 1688.1709 3.1149 0.0393
 #> Residuo             33 17884.7105  541.9609              
 #> Total               47 37963.0170  807.7238              
 #> ------------------------------------------------------------------------
 #> 
 #> 
 #> 
-#>  Dose  dentro do nivel  Foliar  de  Forma 
+#>  Dose  dentro do nivel  foliar  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -3233,7 +3235,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -3314,7 +3316,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -3495,16 +3497,16 @@ dados <- dados %>%
 #>                     GL        SQ        QM     Fc  Pr.Fc
 #> Bloco                3  121.7378  40.57928 0.4907 0.6911
 #> Forma                2  686.1880 343.09403  4.149 0.0247
-#> Dose:Forma Foliar    3  123.5995  41.19982 0.4982 0.6861
-#> Dose:Forma Solo      3  285.0157  95.00524 1.1489 0.3439
-#> Dose:Forma Controle  3  789.7431 263.24771 3.1834 0.0366
+#> Dose:Forma foliar    3  123.5995  41.19982 0.4982 0.6861
+#> Dose:Forma solo      3  285.0157  95.00524 1.1489 0.3439
+#> Dose:Forma controle  3  789.7431 263.24771 3.1834 0.0366
 #> Residuo             33 2728.8719  82.69309              
 #> Total               47 4735.1561 100.74800              
 #> ------------------------------------------------------------------------
 #> 
 #> 
 #> 
-#>  Dose  dentro do nivel  Foliar  de  Forma 
+#>  Dose  dentro do nivel  foliar  de  Forma 
 #> 
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
@@ -3516,7 +3518,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -3597,7 +3599,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -3781,9 +3783,9 @@ dados <- dados %>%
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
 #>     Niveis    Medias
-#> 1 Controle 0.8015625
-#> 2   Foliar 0.8019375
-#> 3     Solo 0.7899375
+#> 1 controle 0.8015625
+#> 2   foliar 0.8019375
+#> 3     solo 0.7899375
 #> ------------------------------------------------------------------------
 #> [1] "Variavel: n_1"
 #> ------------------------------------------------------------------------
@@ -3824,16 +3826,16 @@ dados <- dados %>%
 #>                     GL       SQ      QM      Fc  Pr.Fc
 #> Bloco                3  1.37314 0.45771  3.2765 0.0331
 #> Forma                2  0.03361 0.01681  0.1203  0.887
-#> Dose:Forma Foliar    3  1.52460 0.50820  3.6379 0.0226
-#> Dose:Forma Solo      3  3.20547 1.06849  7.6487  5e-04
-#> Dose:Forma Controle  3  8.24602 2.74867 19.6763      0
+#> Dose:Forma foliar    3  1.52460 0.50820  3.6379 0.0226
+#> Dose:Forma solo      3  3.20547 1.06849  7.6487  5e-04
+#> Dose:Forma controle  3  8.24602 2.74867 19.6763      0
 #> Residuo             33  4.60994 0.13970               
 #> Total               47 18.99278 0.40410               
 #> ------------------------------------------------------------------------
 #> 
 #> 
 #> 
-#>  Dose  dentro do nivel  Foliar  de  Forma 
+#>  Dose  dentro do nivel  foliar  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -3914,7 +3916,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -3995,7 +3997,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -4176,16 +4178,16 @@ dados <- dados %>%
 #>                     GL       SQ      QM      Fc  Pr.Fc
 #> Bloco                3  0.60023 0.20008  0.7098 0.5531
 #> Forma                2  8.31989 4.15995 14.7586      0
-#> Dose:Forma Foliar    3  0.46397 0.15466  0.5487 0.6525
-#> Dose:Forma Solo      3  3.96886 1.32295  4.6935 0.0077
-#> Dose:Forma Controle  3  0.43805 0.14602   0.518 0.6728
+#> Dose:Forma foliar    3  0.46397 0.15466  0.5487 0.6525
+#> Dose:Forma solo      3  3.96886 1.32295  4.6935 0.0077
+#> Dose:Forma controle  3  0.43805 0.14602   0.518 0.6728
 #> Residuo             33  9.30160 0.28187               
 #> Total               47 23.09261 0.49133               
 #> ------------------------------------------------------------------------
 #> 
 #> 
 #> 
-#>  Dose  dentro do nivel  Foliar  de  Forma 
+#>  Dose  dentro do nivel  foliar  de  Forma 
 #> 
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
@@ -4197,7 +4199,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -4278,7 +4280,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> 
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
@@ -4393,9 +4395,9 @@ dados <- dados %>%
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
 #>     Niveis   Medias
-#> 1 Controle 19.93313
-#> 2   Foliar 20.17500
-#> 3     Solo 20.25187
+#> 1 controle 19.93313
+#> 2   foliar 20.17500
+#> 3     solo 20.25187
 #> ------------------------------------------------------------------------
 #> [1] "Variavel: mo_2"
 #> ------------------------------------------------------------------------
@@ -4436,16 +4438,16 @@ dados <- dados %>%
 #>                     GL       SQ       QM      Fc  Pr.Fc
 #> Bloco                3  0.51791  0.17264  0.3136 0.8154
 #> Forma                2 29.06011 14.53006 26.3938      0
-#> Dose:Forma Foliar    3  1.02896  0.34299   0.623 0.6052
-#> Dose:Forma Solo      3 16.63427  5.54476  10.072  1e-04
-#> Dose:Forma Controle  3  3.60250  1.20083  2.1813 0.1088
+#> Dose:Forma foliar    3  1.02896  0.34299   0.623 0.6052
+#> Dose:Forma solo      3 16.63427  5.54476  10.072  1e-04
+#> Dose:Forma controle  3  3.60250  1.20083  2.1813 0.1088
 #> Residuo             33 18.16681  0.55051               
 #> Total               47 69.01057  1.46831               
 #> ------------------------------------------------------------------------
 #> 
 #> 
 #> 
-#>  Dose  dentro do nivel  Foliar  de  Forma 
+#>  Dose  dentro do nivel  foliar  de  Forma 
 #> 
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
@@ -4457,7 +4459,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -4538,7 +4540,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -4719,16 +4721,16 @@ dados <- dados %>%
 #>                     GL      SQ      QM     Fc  Pr.Fc
 #> Bloco                3 0.01704 0.00568 0.5558 0.6479
 #> Forma                2 0.03241 0.01620 1.5862 0.2199
-#> Dose:Forma Controle  3 0.02919 0.00973 0.9525 0.4266
+#> Dose:Forma controle  3 0.02919 0.00973 0.9525 0.4266
 #> Dose:Forma foliar    3 0.00943 0.00314 0.3075 0.8197
-#> Dose:Forma Solo      3 0.05369 0.01790 1.7516 0.1756
+#> Dose:Forma solo      3 0.05369 0.01790 1.7516 0.1756
 #> Residuo             33 0.33714 0.01022              
 #> Total               47 0.47901 0.01019              
 #> ------------------------------------------------------------------------
 #> 
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> 
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
@@ -4752,7 +4754,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -4933,16 +4935,16 @@ dados <- dados %>%
 #>                     GL      SQ      QM     Fc  Pr.Fc
 #> Bloco                3 0.05153 0.01718 0.4844 0.6954
 #> Forma                2 0.32018 0.16009 4.5155 0.0185
-#> Dose:Forma Controle  3 0.00898 0.00299 0.0844 0.9681
+#> Dose:Forma controle  3 0.00898 0.00299 0.0844 0.9681
 #> Dose:Forma foliar    3 0.77673 0.25891 7.3028  7e-04
-#> Dose:Forma Solo      3 0.46194 0.15398 4.3432  0.011
+#> Dose:Forma solo      3 0.46194 0.15398 4.3432  0.011
 #> Residuo             33 1.16997 0.03545              
 #> Total               47 2.78491 0.05925              
 #> ------------------------------------------------------------------------
 #> 
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> 
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
@@ -5035,7 +5037,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -5288,9 +5290,9 @@ dados <- dados %>%
 #> De acordo com o teste F, as medias desse fator sao estatisticamente iguais.
 #> ------------------------------------------------------------------------
 #>     Niveis    Medias
-#> 1 Controle 0.2250800
+#> 1 controle 0.2250800
 #> 2   foliar 0.2137695
-#> 3     Solo 0.2236152
+#> 3     solo 0.2236152
 #> ------------------------------------------------------------------------
 #> [1] "Variavel: tch"
 #> ------------------------------------------------------------------------
@@ -5332,8 +5334,8 @@ dados <- dados %>%
 #> Bloco                3  121.7378  40.57928 0.4907 0.6911
 #> Forma                2  686.1880 343.09403  4.149 0.0247
 #> Dose:Forma foliar    3  123.5995  41.19982 0.4982 0.6861
-#> Dose:Forma Solo      3  285.0157  95.00524 1.1489 0.3439
-#> Dose:Forma Controle  3  789.7431 263.24771 3.1834 0.0366
+#> Dose:Forma solo      3  285.0157  95.00524 1.1489 0.3439
+#> Dose:Forma controle  3  789.7431 263.24771 3.1834 0.0366
 #> Residuo             33 2728.8719  82.69309              
 #> Total               47 4735.1561 100.74800              
 #> ------------------------------------------------------------------------
@@ -5352,7 +5354,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Solo  de  Forma 
+#>  Dose  dentro do nivel  solo  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -5433,7 +5435,7 @@ dados <- dados %>%
 #> ------------------------------------------------------------------------
 #> 
 #> 
-#>  Dose  dentro do nivel  Controle  de  Forma 
+#>  Dose  dentro do nivel  controle  de  Forma 
 #> ------------------------------------------------------------------------
 #> Ajuste de modelos polinomiais de regressao
 #> ------------------------------------------------------------------------
@@ -5706,3 +5708,131 @@ dados$interacao
     #> [[6]][[3]]
 
 ![](README_files/figure-gfm/unnamed-chunk-5-23.png)<!-- -->
+
+``` r
+dados$best
+#> [[1]]
+#> [[1]][[1]]
+```
+
+![](README_files/figure-gfm/unnamed-chunk-5-24.png)<!-- -->
+
+    #> 
+    #> 
+    #> [[2]]
+    #> [[2]][[1]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-25.png)<!-- -->
+
+    #> 
+    #> [[2]][[2]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-26.png)<!-- -->
+
+    #> 
+    #> [[2]][[3]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-27.png)<!-- -->
+
+    #> 
+    #> [[2]][[4]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-28.png)<!-- -->
+
+    #> 
+    #> 
+    #> [[3]]
+    #> [[3]][[1]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-29.png)<!-- -->
+
+    #> 
+    #> [[3]][[2]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-30.png)<!-- -->
+
+    #> 
+    #> [[3]][[3]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-31.png)<!-- -->
+
+    #> 
+    #> [[3]][[4]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-32.png)<!-- -->
+
+    #> 
+    #> [[3]][[5]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-33.png)<!-- -->
+
+    #> 
+    #> [[3]][[6]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-34.png)<!-- -->
+
+    #> 
+    #> 
+    #> [[4]]
+    #> [[4]][[1]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-35.png)<!-- -->
+
+    #> 
+    #> [[4]][[2]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-36.png)<!-- -->
+
+    #> 
+    #> [[4]][[3]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-37.png)<!-- -->
+
+    #> 
+    #> [[4]][[4]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-38.png)<!-- -->
+
+    #> 
+    #> [[4]][[5]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-39.png)<!-- -->
+
+    #> 
+    #> [[4]][[6]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-40.png)<!-- -->
+
+    #> 
+    #> 
+    #> [[5]]
+    #> [[5]][[1]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-41.png)<!-- -->
+
+    #> 
+    #> [[5]][[2]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-42.png)<!-- -->
+
+    #> 
+    #> [[5]][[3]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-43.png)<!-- -->
+
+    #> 
+    #> 
+    #> [[6]]
+    #> [[6]][[1]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-44.png)<!-- -->
+
+    #> 
+    #> [[6]][[2]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-45.png)<!-- -->
+
+    #> 
+    #> [[6]][[3]]
+
+![](README_files/figure-gfm/unnamed-chunk-5-46.png)<!-- -->

@@ -40,11 +40,13 @@ Observe que nessa análise desdobramos as  interações menores que $0,35$. Util
 ```{r}
 dados <- dados %>% 
   dplyr::mutate(
-    boxplot = purrr::map(data, my_summary, type="boxplot"),
-    histograma = purrr::map(data, my_summary,type="histograma"),
-    anova = purrr::map(data, my_summary,type="regressao"),
+    # boxplot = purrr::map(data, my_summary, type="boxplot"),
+    # histograma = purrr::map(data, my_summary,type="histograma"),
+    # anova = purrr::map(data, my_summary,type="regressao"),
     interacao = purrr::map(data, my_summary,type="interacao"),
-    desdobramento = purrr::map(data, my_summary,type="desdobramento")
+    # ajustes = purrr::map(data, my_summary,type="ajustes")
+    desdobramento = purrr::map(data, my_summary,type="desdobramento"),
+    best = purrr::map(data, my_summary,type="best")
   )
 ```
 
@@ -52,6 +54,7 @@ dados <- dados %>%
 
 ```{r}
 dados$interacao
+dados$best
 ```
 
 

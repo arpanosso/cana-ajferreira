@@ -6,6 +6,7 @@ get_data <- function(plan, path){
   readxl::read_xlsx(path,
                     sheet = plan) %>%
     janitor::clean_names() %>%
+    dplyr::mutate(forma = stringr::str_to_lower(forma)) %>%
     dplyr::mutate(dplyr::across(where(is.character), forcats::as_factor))
 }
 path <- "data-raw/DADOS_N+MO_SOCA.xlsx"
